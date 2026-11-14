@@ -67,6 +67,7 @@ class PasarelaPagosMock(IPasarelaPagos):
     """
     def __init__(self):
         self.cobros_procesados = {}
+        self.reembolsos_procesados = {}
 
     def procesar_cobro(self, id_reserva: str, monto: float, idempotency_key: str, simular_falla: bool = False) -> bool:
         Validator.validar_monto(monto, "monto_cobro")
@@ -85,6 +86,11 @@ class PasarelaPagosMock(IPasarelaPagos):
         return True
 
     def reembolsar(self, id_reserva: str, monto: float) -> bool:
+        # La misma reserva no puede generar dos reembolsos en este simulador.
+        if id_reserva in self.reembolsos_procesados:
+            logger.info(f"[Pasarela] Reembolso idempotente ya registrado para reserva {id_reserva}")
+            return True
+        self.reembolsos_procesados[id_reserva] = {"monto": monto, "exito": True}
         logger.info(f"↩️ [Pasarela] Reembolso procesado para reserva {id_reserva} por ${monto:,.2f}")
         return True
 
@@ -113,6 +119,7 @@ class SagaOrquestadorReserva:
         """Ejecuta el flujo orquestado de la Saga con compensación automática."""
         log_saga = []
         reserva = None
+        pago_ok = False
         logger.info(f"🏁 Iniciando Saga para reserva del socio={socio_id}")
 
         try:
@@ -136,6 +143,7 @@ class SagaOrquestadorReserva:
             )
             if not pago_ok:
                 raise RuntimeError("Falla en Pasarela de Pagos (Rechazo Financiero). Disparando Compensación Inversa (C1).")
+            pago_ok = True
 
             self.gimnasio_service.registrar_pago(reserva)
             msg_t2 = f"T2 [Pagos]: Débito de ${reserva.total:,.2f} exitoso en pasarela."
@@ -164,10 +172,19 @@ class SagaOrquestadorReserva:
             if reserva is not None:
                 logger.warning(f"Iniciando Compensación C1 para Reserva {reserva.id_reserva}...")
 
-                # C1: el servicio devuelve los cupos por el puerto del catálogo y marca COMPENSADO
-                self.gimnasio_service.compensar_reserva(reserva, f"Aborto por falla en paso T2: {str(e)}")
-                msg_c1 = "C1 [Compensación Cupos]: Cupos devueltos al gimnasio. Estado: COMPENSADO."
-                log_saga.append(msg_c1)
-                logger.info(msg_c1)
+                # Si el débito ya fue aprobado y falla un paso posterior, devolver primero el dinero.
+                if pago_ok:
+                    if self.pasarela.reembolsar(reserva.id_reserva, reserva.total):
+                        log_saga.append("C1 [Reembolso]: Dinero devuelto al socio.")
+                    else:
+                        log_saga.append("C1 [Reembolso]: No se pudo confirmar el reembolso; requiere reintento.")
+                        logger.error(f"Reembolso pendiente para reserva {reserva.id_reserva}")
+
+                # Evita devolver cupos dos veces si la reserva ya fue compensada.
+                if reserva.estado != EstadoReserva.COMPENSADO:
+                    self.gimnasio_service.compensar_reserva(reserva, f"Compensación por falla en Saga: {str(e)}")
+                    msg_c1 = "C1 [Compensación Cupos]: Cupos devueltos al gimnasio. Estado: COMPENSADO."
+                    log_saga.append(msg_c1)
+                    logger.info(msg_c1)
 
             return {"exito": False, "reserva": reserva, "log": log_saga, "error": str(e)}
