@@ -1,0 +1,10 @@
+OK    El panel tiene 5 pestañas (reservas, portal, gestión, base de datos, eventos)
+OK    No hay enlaces con target=_blank en el panel
+OK    Dentro del panel, el portal oculta su barra de enlaces
+OK    La pestaña Base de datos muestra el consumo recién registrado (consumos_suplemento — 1 fila(s))
+OK    La pestaña Eventos muestra los CloudEvents publicados por la reserva (4 eventos)
+OK    Al hacer clic en un evento se muestra su JSON
+OK    Al abrir las pestañas del panel NO se abrió ninguna ventana o pestaña nueva
+OK    Desde /usuario, "Base de datos" se abre en la misma pestaña (/basedatos)
+OK    Desde /basedatos, "Panel integrado" se abre en la misma pestaña (/panel)
+OK    Al final solo existe 1 pestaña abierta (hay 1)

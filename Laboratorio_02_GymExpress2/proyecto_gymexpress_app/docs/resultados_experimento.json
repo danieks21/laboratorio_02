@@ -1,0 +1,302 @@
+{
+  "variantes": [
+    {
+      "variante": "A) Actual (1 hilo, cola 5)",
+      "carga": [
+        {
+          "escenario": "LECTURA",
+          "concurrencia": 20,
+          "solicitudes": 400,
+          "errores": 0,
+          "errores_por_estado": {},
+          "p50": 8.8,
+          "p95": 16.8,
+          "p99": 1216.5,
+          "max": 1221.8,
+          "throughput": 325.6
+        },
+        {
+          "escenario": "ESCRITURA SIMPLE",
+          "concurrencia": 20,
+          "solicitudes": 200,
+          "errores": 7,
+          "errores_por_estado": {
+            "0": 7
+          },
+          "p50": 19.5,
+          "p95": 1026.9,
+          "p99": 1044.6,
+          "max": 1049.5,
+          "throughput": 189.5
+        },
+        {
+          "escenario": "ESCRITURA SAGA",
+          "concurrencia": 20,
+          "solicitudes": 120,
+          "errores": 7,
+          "errores_por_estado": {
+            "0": 7
+          },
+          "p50": 59.0,
+          "p95": 1081.5,
+          "p99": 1293.2,
+          "max": 1304.9,
+          "throughput": 91.5
+        }
+      ],
+      "sobreventa": {
+        "cupos_iniciales": 10,
+        "intentos": 40,
+        "reservas_aceptadas": 10,
+        "cupos_finales": 0,
+        "sobrevendido": false
+      }
+    },
+    {
+      "variante": "B) 1 hilo, cola 128",
+      "carga": [
+        {
+          "escenario": "LECTURA",
+          "concurrencia": 20,
+          "solicitudes": 400,
+          "errores": 0,
+          "errores_por_estado": {},
+          "p50": 25.9,
+          "p95": 28.5,
+          "p99": 29.2,
+          "max": 29.3,
+          "throughput": 804.2
+        },
+        {
+          "escenario": "ESCRITURA SIMPLE",
+          "concurrencia": 20,
+          "solicitudes": 200,
+          "errores": 0,
+          "errores_por_estado": {},
+          "p50": 78.4,
+          "p95": 89.3,
+          "p99": 91.3,
+          "max": 92.3,
+          "throughput": 255.1
+        },
+        {
+          "escenario": "ESCRITURA SAGA",
+          "concurrencia": 20,
+          "solicitudes": 120,
+          "errores": 0,
+          "errores_por_estado": {},
+          "p50": 229.3,
+          "p95": 264.9,
+          "p99": 274.4,
+          "max": 275.5,
+          "throughput": 86.6
+        }
+      ],
+      "sobreventa": {
+        "cupos_iniciales": 10,
+        "intentos": 40,
+        "reservas_aceptadas": 10,
+        "cupos_finales": 0,
+        "sobrevendido": false
+      }
+    },
+    {
+      "variante": "C) Con hilos, cola 128",
+      "carga": [
+        {
+          "escenario": "LECTURA",
+          "concurrencia": 20,
+          "solicitudes": 400,
+          "errores": 0,
+          "errores_por_estado": {},
+          "p50": 21.1,
+          "p95": 36.9,
+          "p99": 58.0,
+          "max": 84.2,
+          "throughput": 850.8
+        },
+        {
+          "escenario": "ESCRITURA SIMPLE",
+          "concurrencia": 20,
+          "solicitudes": 200,
+          "errores": 0,
+          "errores_por_estado": {},
+          "p50": 11.9,
+          "p95": 234.7,
+          "p99": 443.4,
+          "max": 548.3,
+          "throughput": 334.6
+        },
+        {
+          "escenario": "ESCRITURA SAGA",
+          "concurrencia": 20,
+          "solicitudes": 120,
+          "errores": 0,
+          "errores_por_estado": {},
+          "p50": 67.6,
+          "p95": 438.7,
+          "p99": 803.1,
+          "max": 860.3,
+          "throughput": 121.3
+        }
+      ],
+      "sobreventa": {
+        "cupos_iniciales": 10,
+        "intentos": 40,
+        "reservas_aceptadas": 40,
+        "cupos_finales": 7,
+        "sobrevendido": true
+      }
+    }
+  ],
+  "linea_base_A": [
+    {
+      "escenario": "LECTURA",
+      "concurrencia": 1,
+      "solicitudes": 400,
+      "errores": 0,
+      "errores_por_estado": {},
+      "p50": 1.1,
+      "p95": 1.7,
+      "p99": 2.1,
+      "max": 3.6,
+      "throughput": 848.4
+    },
+    {
+      "escenario": "LECTURA",
+      "concurrencia": 5,
+      "solicitudes": 400,
+      "errores": 0,
+      "errores_por_estado": {},
+      "p50": 5.1,
+      "p95": 6.6,
+      "p99": 7.2,
+      "max": 9.1,
+      "throughput": 939.3
+    },
+    {
+      "escenario": "LECTURA",
+      "concurrencia": 10,
+      "solicitudes": 400,
+      "errores": 0,
+      "errores_por_estado": {},
+      "p50": 7.3,
+      "p95": 10.6,
+      "p99": 13.2,
+      "max": 1033.9,
+      "throughput": 385.1
+    },
+    {
+      "escenario": "LECTURA",
+      "concurrencia": 20,
+      "solicitudes": 400,
+      "errores": 0,
+      "errores_por_estado": {},
+      "p50": 6.2,
+      "p95": 9.3,
+      "p99": 1224.0,
+      "max": 1430.8,
+      "throughput": 278.6
+    },
+    {
+      "escenario": "ESCRITURA SIMPLE",
+      "concurrencia": 1,
+      "solicitudes": 200,
+      "errores": 0,
+      "errores_por_estado": {},
+      "p50": 3.3,
+      "p95": 4.2,
+      "p99": 4.6,
+      "max": 6.4,
+      "throughput": 294.2
+    },
+    {
+      "escenario": "ESCRITURA SIMPLE",
+      "concurrencia": 5,
+      "solicitudes": 200,
+      "errores": 0,
+      "errores_por_estado": {},
+      "p50": 17.0,
+      "p95": 22.1,
+      "p99": 33.4,
+      "max": 34.3,
+      "throughput": 282.5
+    },
+    {
+      "escenario": "ESCRITURA SIMPLE",
+      "concurrencia": 10,
+      "solicitudes": 200,
+      "errores": 0,
+      "errores_por_estado": {},
+      "p50": 18.1,
+      "p95": 24.7,
+      "p99": 1011.9,
+      "max": 1018.5,
+      "throughput": 196.0
+    },
+    {
+      "escenario": "ESCRITURA SIMPLE",
+      "concurrencia": 20,
+      "solicitudes": 200,
+      "errores": 6,
+      "errores_por_estado": {
+        "0": 6
+      },
+      "p50": 18.8,
+      "p95": 1004.9,
+      "p99": 1023.2,
+      "max": 1030.7,
+      "throughput": 191.3
+    },
+    {
+      "escenario": "ESCRITURA SAGA",
+      "concurrencia": 1,
+      "solicitudes": 120,
+      "errores": 0,
+      "errores_por_estado": {},
+      "p50": 11.5,
+      "p95": 13.7,
+      "p99": 15.0,
+      "max": 15.2,
+      "throughput": 90.8
+    },
+    {
+      "escenario": "ESCRITURA SAGA",
+      "concurrencia": 5,
+      "solicitudes": 120,
+      "errores": 0,
+      "errores_por_estado": {},
+      "p50": 59.9,
+      "p95": 72.1,
+      "p99": 105.8,
+      "max": 107.6,
+      "throughput": 81.3
+    },
+    {
+      "escenario": "ESCRITURA SAGA",
+      "concurrencia": 10,
+      "solicitudes": 120,
+      "errores": 0,
+      "errores_por_estado": {},
+      "p50": 64.0,
+      "p95": 85.8,
+      "p99": 1279.6,
+      "max": 1289.8,
+      "throughput": 57.9
+    },
+    {
+      "escenario": "ESCRITURA SAGA",
+      "concurrencia": 20,
+      "solicitudes": 120,
+      "errores": 7,
+      "errores_por_estado": {
+        "0": 7
+      },
+      "p50": 57.0,
+      "p95": 1037.8,
+      "p99": 1236.1,
+      "max": 1252.1,
+      "throughput": 95.2
+    }
+  ]
+}

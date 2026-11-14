@@ -1,0 +1,48 @@
+============================================================================================================
+AUDITORÍA DE MÉTRICAS DE ROBERT C. MARTIN — GymExpress
+============================================================================================================
+Módulo                     Ca  Ce     I  Clases  Abs.     A     D   Zona
+------------------------------------------------------------------------------------------------------------
+src.db                      3   0  0.00       0     0  0.00  1.00   Sin clases (funciones/constantes)
+src.logger                 11   0  0.00       2     0  0.00  1.00   Zona de dolor (estable y concreto)
+src.models                  5   0  0.00       6     0  0.00  1.00   Zona de dolor (estable y concreto)
+src.models_extra            3   0  0.00       9     0  0.00  1.00   Zona de dolor (estable y concreto)
+src.pages_extra             1   0  0.00       0     0  0.00  1.00   Sin clases (funciones/constantes)
+src.validators              6   0  0.00       2     0  0.00  1.00   Zona de dolor (estable y concreto)
+src.events                  6   0  0.00      13     1  0.08  0.92   Zona de dolor (estable y concreto)
+src.db_viewer               1   1  0.50       1     0  0.00  0.50   Zona de dolor (estable y concreto)
+src.validators_extra        1   1  0.50       1     0  0.00  0.50   Zona de dolor (estable y concreto)
+src.consumidores            1   2  0.67       4     0  0.00  0.33   Zona de dolor (estable y concreto)
+src.event_bus               1   2  0.67       3     0  0.00  0.33   Zona de dolor (estable y concreto)
+src.interfaces_extra        2   1  0.33       5     5  1.00  0.33   Zona de inutilidad (abstracto e inestable)
+src.contexto_catalogo       1   4  0.80       1     0  0.00  0.20   Cercano a la secuencia principal
+src.interfaces              4   1  0.20       5     5  1.00  0.20   Cercano a la secuencia principal
+src.repositories            1   4  0.80       3     0  0.00  0.20   Cercano a la secuencia principal
+src.repositories_extra      1   4  0.80       5     0  0.00  0.20   Cercano a la secuencia principal
+src.contexto_reservas       1   5  0.83       1     0  0.00  0.17   Cercano a la secuencia principal
+src.app_extras              1   6  0.86       1     0  0.00  0.14   Cercano a la secuencia principal
+src.services_extra          1   6  0.86       5     0  0.00  0.14   Cercano a la secuencia principal
+src.app                     1   7  0.88       2     0  0.00  0.12   Cercano a la secuencia principal
+src.services                1   7  0.88       3     0  0.00  0.12   Cercano a la secuencia principal
+main                        0   2  1.00       0     0  0.00  0.00   Sin clases (funciones/constantes)
+------------------------------------------------------------------------------------------------------------
+Promedios: I = 0.48   A = 0.09   D = 0.47   (22 módulos; umbral D <= 0.3)
+Solo módulos con clases (19): D promedio = 0.44   (D no es significativo para módulos sin clases)
+
+VERIFICACIÓN AUTOMÁTICA DE REGLAS (SoD / DIP / SDP / ADP)
+------------------------------------------------------------------------------------------------------------
+[CUMPLE ] (DIP) Los servicios no importan repositorios concretos (solo interfaces)
+[CUMPLE ] (DIP) Las interfaces no dependen de servicios, repositorios ni de la capa web
+[CUMPLE ] (DIP / SRP) Los modelos de dominio no dependen de ningún otro módulo del proyecto
+[CUMPLE ] (DIP) Solo los composition roots (app, app_extras) instancian repositorios concretos
+[CUMPLE ] (SoD) Solo los repositorios (y db/db_viewer) importan sqlite3
+[CUMPLE ] (SoD) Solo la capa web (app, app_extras) importa http.server
+[CUMPLE ] (SoD) Los servicios y validadores no importan la capa web
+[CUMPLE ] (Bounded Contexts) Los Bounded Contexts Catálogo y Reservas no se importan entre sí (solo puerto y eventos)
+[CUMPLE ] (DIP) Los contextos y servicios no importan el bus concreto ni los consumidores (solo el puerto IEventPublisher)
+[CUMPLE ] (DIP) Solo los composition roots importan el bus concreto y los consumidores
+[CUMPLE ] (DIP) El contrato de eventos (events) no depende de ningún otro módulo del proyecto
+[CUMPLE ] (SDP) Principio de Dependencias Estables: se depende de módulos más estables
+[CUMPLE ] (ADP) Sin ciclos de dependencia entre módulos
+
+Resultado: 13/13 reglas cumplidas.

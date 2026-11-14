@@ -1,0 +1,59 @@
+{
+  "latencia_consumidor_ms": 50.0,
+  "consumidores": 3,
+  "n": 15,
+  "parte_a": {
+    "sincrono": {
+      "respuesta_saga_ms": {
+        "media": 467.1,
+        "p50": 463.7,
+        "p95": 515.9,
+        "max": 515.9
+      },
+      "publicar_ms": {
+        "media": 151.587,
+        "p95": 150.76,
+        "max": 196.886
+      },
+      "eventos_por_saga": 3.0,
+      "espera_final_consumidores_ms": 0.0
+    },
+    "asincrono": {
+      "respuesta_saga_ms": {
+        "media": 8.4,
+        "p50": 8.4,
+        "p95": 9.6,
+        "max": 9.6
+      },
+      "publicar_ms": {
+        "media": 0.011,
+        "p95": 0.026,
+        "max": 0.037
+      },
+      "eventos_por_saga": 3.0,
+      "espera_final_consumidores_ms": 1682.7
+    }
+  },
+  "parte_b": {
+    "sincrono": {
+      "respuesta_http_ms": {
+        "media": 465.5,
+        "p50": 465.5,
+        "p95": 470.2,
+        "max": 470.2
+      },
+      "solicitudes_ok": 15
+    },
+    "asincrono": {
+      "respuesta_http_ms": {
+        "media": 10.2,
+        "p50": 11.0,
+        "p95": 13.1,
+        "max": 13.1
+      },
+      "solicitudes_ok": 15
+    }
+  },
+  "mejora_http_x": 45.6,
+  "reduccion_http_pct": 98
+}

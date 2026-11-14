@@ -1,0 +1,24 @@
+@startuml nivel2_contenedores
+!include <C4/C4_Container>
+LAYOUT_LEFT_RIGHT()
+skinparam dpi 200
+title Diagrama C4 - Nivel 2: Contenedores de GymExpress
+
+Person(socio, "Socio", "Portal del socio (/usuario)")
+Person(admin, "Personal administrativo", "Reservas (/), panel interno (/gestion) y base de datos (/basedatos)")
+
+System_Boundary(gym, "GymExpress") {
+    Container(web, "Interfaz web", "HTML + CSS + JavaScript", "Páginas servidas por la propia aplicación; consumen la API REST con fetch()")
+    Container(app, "Aplicación Python", "Python 3.10+ / http.server (puerto 8086)", "API REST, servicios de negocio, Saga de reservas, validaciones y registro en Outbox")
+    ContainerDb(db, "Base de datos", "SQLite en modo WAL (gymexpress.db)", "servicios, reservas, outbox_events, entrenadores, horarios, suplementos, consumos, insumos, movimientos, elementos_prestables, prestamos, horario_gimnasio, gimnasio_info")
+}
+System_Ext(pasarela, "Pasarela de pagos", "Simulada (PasarelaPagosMock)")
+
+Rel(socio, web, "Usa", "HTTP localhost:8086")
+Rel(admin, web, "Usa", "HTTP localhost:8086")
+Rel(web, app, "Llama a la API", "JSON sobre HTTP")
+Rel(app, db, "Lee y escribe", "sqlite3 (SQL, transacciones)")
+Rel(app, pasarela, "Cobra y reembolsa", "IPasarelaPagos")
+
+SHOW_LEGEND()
+@enduml

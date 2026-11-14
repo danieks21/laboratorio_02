@@ -1,0 +1,42 @@
+@startuml nivel3_componentes
+!include <C4/C4_Component>
+LAYOUT_TOP_DOWN()
+skinparam dpi 200
+title Diagrama C4 - Nivel 3: Componentes de la Aplicación Python
+
+Container(web, "Interfaz web", "HTML + CSS + JavaScript", "Navegador del socio o del personal")
+ContainerDb(db, "Base de datos", "SQLite WAL (gymexpress.db)", "Persistencia")
+System_Ext(pasarela, "Pasarela de pagos", "Simulada")
+
+Container_Boundary(app, "Aplicación Python") {
+    Component(root, "Composition Root", "app.py", "Crea repositorios y servicios e inyecta dependencias")
+    Component(handler, "GymExpressHTTPHandler", "http.server (app.py)", "Rutas de reservas: / y /api/reservas")
+    Component(extras, "ExtrasRouter", "app_extras.py + pages_extra.py", "Rutas /usuario, /gestion, /basedatos y APIs del módulo extensión")
+    Component(servicios, "Servicios de negocio", "services.py, services_extra.py", "Reglas de negocio y Saga de reservas")
+    Component(validators, "Validadores", "validators.py, validators_extra.py", "Validación Fail-Fast de entradas")
+    Component(models, "Modelos de dominio", "models.py, models_extra.py", "Entidades del dominio")
+    Component(interfaces, "Interfaces (puertos)", "interfaces.py, interfaces_extra.py", "Contratos hacia persistencia y pasarela")
+    Component(repos, "Repositorios SQLite", "repositories.py, repositories_extra.py, db.py", "Implementan los contratos; transacciones y cierre de conexiones")
+    Component(mock, "PasarelaPagosMock", "services.py", "Simula cobros (IPasarelaPagos)")
+    Component(visor, "VisorBD", "db_viewer.py", "Consulta de solo lectura de las tablas")
+}
+
+Rel(web, handler, "Solicita páginas y API", "HTTP")
+Rel(web, extras, "Solicita páginas y API", "HTTP")
+Rel(root, repos, "Instancia")
+Rel(root, servicios, "Inyecta repositorios y pasarela")
+Rel(handler, servicios, "Invoca")
+Rel(extras, servicios, "Invoca")
+Rel(extras, visor, "Consulta")
+Rel(servicios, validators, "Valida con")
+Rel(servicios, models, "Usa")
+Rel(servicios, interfaces, "Depende de (abstracciones)")
+Rel(repos, interfaces, "Implementa")
+Rel(mock, interfaces, "Implementa")
+Rel(repos, models, "Construye")
+Rel(repos, db, "SQL", "sqlite3")
+Rel(visor, db, "SELECT (solo lectura)", "sqlite3")
+Rel(mock, pasarela, "Representa a")
+
+SHOW_LEGEND()
+@enduml

@@ -1,0 +1,41 @@
+@startuml nivel3_contextos_eventos
+!include <C4/C4_Component>
+LAYOUT_TOP_DOWN()
+skinparam dpi 200
+title Sesión 2 - Bounded Contexts y flujo de eventos CloudEvents v1.0
+
+Container(web, "Interfaz web", "HTML + JavaScript", "POST /api/reservas/saga")
+ContainerDb(db, "Base de datos", "SQLite WAL", "servicios, reservas, outbox_events")
+
+Container_Boundary(app, "Aplicación Python") {
+    Boundary(ctx_res, "Contexto RESERVAS (subdominio núcleo)") {
+        Component(saga, "SagaOrquestadorReserva", "services.py", "T1 reserva, T2 cobro, T3 confirmación, C1 compensación")
+        Component(fachada, "GimnasioService", "services.py", "Fachada: compone los dos contextos")
+        Component(reservas, "ReservasService", "contexto_reservas.py", "Ciclo de vida de la reserva y Outbox")
+    }
+    Boundary(ctx_cat, "Contexto CATÁLOGO (subdominio de soporte)") {
+        Component(catalogo, "CatalogoService", "contexto_catalogo.py", "Servicios, precios y cupos atómicos")
+    }
+    Component(puerto, "ICatalogoPort", "interfaces.py", "Puerto: única frontera entre contextos")
+    Component(publisher, "IEventPublisher + CloudEvent", "events.py", "Contrato de eventos CNCF v1.0 (inmutable)")
+    Component(bus, "InMemoryEventBus", "event_bus.py", "queue.Queue + hilos daemon: publicar() no bloquea")
+    Component(consumidores, "Consumidores idempotentes", "consumidores.py", "Auditoría, notificaciones y alertas")
+    Component(repos, "Repositorios SQLite", "repositories.py", "UPDATE atómico de cupos")
+}
+
+Rel(web, saga, "HTTP")
+Rel(saga, fachada, "Usa")
+Rel(fachada, reservas, "Delega")
+Rel(fachada, catalogo, "Construye")
+Rel(reservas, puerto, "Consulta y bloquea cupos")
+Rel(catalogo, puerto, "Implementa")
+Rel(reservas, publisher, "Publica reserva.*")
+Rel(catalogo, publisher, "Publica cupos.* y alertas")
+Rel(bus, publisher, "Implementa")
+Rel(bus, consumidores, "Despacha en segundo plano")
+Rel(catalogo, repos, "Cupos")
+Rel(reservas, repos, "Reservas y Outbox")
+Rel(repos, db, "SQL")
+
+SHOW_LEGEND()
+@enduml

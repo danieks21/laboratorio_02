@@ -1,0 +1,512 @@
+{
+  "modulos": {
+    "src.app": {
+      "modulo": "src.app",
+      "Ca": 1,
+      "Ce": 7,
+      "I": 0.88,
+      "clases": 2,
+      "abstractas": 0,
+      "A": 0.0,
+      "D": 0.12,
+      "zona": "Cercano a la secuencia principal",
+      "depende_de": [
+        "src.app_extras",
+        "src.consumidores",
+        "src.event_bus",
+        "src.logger",
+        "src.repositories",
+        "src.services",
+        "src.validators"
+      ],
+      "usado_por": [
+        "main"
+      ]
+    },
+    "src.app_extras": {
+      "modulo": "src.app_extras",
+      "Ca": 1,
+      "Ce": 6,
+      "I": 0.86,
+      "clases": 1,
+      "abstractas": 0,
+      "A": 0.0,
+      "D": 0.14,
+      "zona": "Cercano a la secuencia principal",
+      "depende_de": [
+        "src.db_viewer",
+        "src.logger",
+        "src.pages_extra",
+        "src.repositories_extra",
+        "src.services_extra",
+        "src.validators"
+      ],
+      "usado_por": [
+        "src.app"
+      ]
+    },
+    "src.consumidores": {
+      "modulo": "src.consumidores",
+      "Ca": 1,
+      "Ce": 2,
+      "I": 0.67,
+      "clases": 4,
+      "abstractas": 0,
+      "A": 0.0,
+      "D": 0.33,
+      "zona": "Zona de dolor (estable y concreto)",
+      "depende_de": [
+        "src.events",
+        "src.logger"
+      ],
+      "usado_por": [
+        "src.app"
+      ]
+    },
+    "src.contexto_catalogo": {
+      "modulo": "src.contexto_catalogo",
+      "Ca": 1,
+      "Ce": 4,
+      "I": 0.8,
+      "clases": 1,
+      "abstractas": 0,
+      "A": 0.0,
+      "D": 0.2,
+      "zona": "Cercano a la secuencia principal",
+      "depende_de": [
+        "src.events",
+        "src.interfaces",
+        "src.logger",
+        "src.models"
+      ],
+      "usado_por": [
+        "src.services"
+      ]
+    },
+    "src.contexto_reservas": {
+      "modulo": "src.contexto_reservas",
+      "Ca": 1,
+      "Ce": 5,
+      "I": 0.83,
+      "clases": 1,
+      "abstractas": 0,
+      "A": 0.0,
+      "D": 0.17,
+      "zona": "Cercano a la secuencia principal",
+      "depende_de": [
+        "src.events",
+        "src.interfaces",
+        "src.logger",
+        "src.models",
+        "src.validators"
+      ],
+      "usado_por": [
+        "src.services"
+      ]
+    },
+    "src.db": {
+      "modulo": "src.db",
+      "Ca": 3,
+      "Ce": 0,
+      "I": 0.0,
+      "clases": 0,
+      "abstractas": 0,
+      "A": 0.0,
+      "D": 1.0,
+      "zona": "Sin clases (funciones/constantes)",
+      "depende_de": [],
+      "usado_por": [
+        "src.db_viewer",
+        "src.repositories",
+        "src.repositories_extra"
+      ]
+    },
+    "src.db_viewer": {
+      "modulo": "src.db_viewer",
+      "Ca": 1,
+      "Ce": 1,
+      "I": 0.5,
+      "clases": 1,
+      "abstractas": 0,
+      "A": 0.0,
+      "D": 0.5,
+      "zona": "Zona de dolor (estable y concreto)",
+      "depende_de": [
+        "src.db"
+      ],
+      "usado_por": [
+        "src.app_extras"
+      ]
+    },
+    "src.event_bus": {
+      "modulo": "src.event_bus",
+      "Ca": 1,
+      "Ce": 2,
+      "I": 0.67,
+      "clases": 3,
+      "abstractas": 0,
+      "A": 0.0,
+      "D": 0.33,
+      "zona": "Zona de dolor (estable y concreto)",
+      "depende_de": [
+        "src.events",
+        "src.logger"
+      ],
+      "usado_por": [
+        "src.app"
+      ]
+    },
+    "src.events": {
+      "modulo": "src.events",
+      "Ca": 6,
+      "Ce": 0,
+      "I": 0.0,
+      "clases": 13,
+      "abstractas": 1,
+      "A": 0.08,
+      "D": 0.92,
+      "zona": "Zona de dolor (estable y concreto)",
+      "depende_de": [],
+      "usado_por": [
+        "src.consumidores",
+        "src.contexto_catalogo",
+        "src.contexto_reservas",
+        "src.event_bus",
+        "src.services",
+        "src.services_extra"
+      ]
+    },
+    "src.interfaces": {
+      "modulo": "src.interfaces",
+      "Ca": 4,
+      "Ce": 1,
+      "I": 0.2,
+      "clases": 5,
+      "abstractas": 5,
+      "A": 1.0,
+      "D": 0.2,
+      "zona": "Cercano a la secuencia principal",
+      "depende_de": [
+        "src.models"
+      ],
+      "usado_por": [
+        "src.contexto_catalogo",
+        "src.contexto_reservas",
+        "src.repositories",
+        "src.services"
+      ]
+    },
+    "src.interfaces_extra": {
+      "modulo": "src.interfaces_extra",
+      "Ca": 2,
+      "Ce": 1,
+      "I": 0.33,
+      "clases": 5,
+      "abstractas": 5,
+      "A": 1.0,
+      "D": 0.33,
+      "zona": "Zona de inutilidad (abstracto e inestable)",
+      "depende_de": [
+        "src.models_extra"
+      ],
+      "usado_por": [
+        "src.repositories_extra",
+        "src.services_extra"
+      ]
+    },
+    "src.logger": {
+      "modulo": "src.logger",
+      "Ca": 11,
+      "Ce": 0,
+      "I": 0.0,
+      "clases": 2,
+      "abstractas": 0,
+      "A": 0.0,
+      "D": 1.0,
+      "zona": "Zona de dolor (estable y concreto)",
+      "depende_de": [],
+      "usado_por": [
+        "main",
+        "src.app",
+        "src.app_extras",
+        "src.consumidores",
+        "src.contexto_catalogo",
+        "src.contexto_reservas",
+        "src.event_bus",
+        "src.repositories",
+        "src.repositories_extra",
+        "src.services",
+        "src.services_extra"
+      ]
+    },
+    "src.models": {
+      "modulo": "src.models",
+      "Ca": 5,
+      "Ce": 0,
+      "I": 0.0,
+      "clases": 6,
+      "abstractas": 0,
+      "A": 0.0,
+      "D": 1.0,
+      "zona": "Zona de dolor (estable y concreto)",
+      "depende_de": [],
+      "usado_por": [
+        "src.contexto_catalogo",
+        "src.contexto_reservas",
+        "src.interfaces",
+        "src.repositories",
+        "src.services"
+      ]
+    },
+    "src.models_extra": {
+      "modulo": "src.models_extra",
+      "Ca": 3,
+      "Ce": 0,
+      "I": 0.0,
+      "clases": 9,
+      "abstractas": 0,
+      "A": 0.0,
+      "D": 1.0,
+      "zona": "Zona de dolor (estable y concreto)",
+      "depende_de": [],
+      "usado_por": [
+        "src.interfaces_extra",
+        "src.repositories_extra",
+        "src.services_extra"
+      ]
+    },
+    "src.pages_extra": {
+      "modulo": "src.pages_extra",
+      "Ca": 1,
+      "Ce": 0,
+      "I": 0.0,
+      "clases": 0,
+      "abstractas": 0,
+      "A": 0.0,
+      "D": 1.0,
+      "zona": "Sin clases (funciones/constantes)",
+      "depende_de": [],
+      "usado_por": [
+        "src.app_extras"
+      ]
+    },
+    "src.repositories": {
+      "modulo": "src.repositories",
+      "Ca": 1,
+      "Ce": 4,
+      "I": 0.8,
+      "clases": 3,
+      "abstractas": 0,
+      "A": 0.0,
+      "D": 0.2,
+      "zona": "Cercano a la secuencia principal",
+      "depende_de": [
+        "src.db",
+        "src.interfaces",
+        "src.logger",
+        "src.models"
+      ],
+      "usado_por": [
+        "src.app"
+      ]
+    },
+    "src.repositories_extra": {
+      "modulo": "src.repositories_extra",
+      "Ca": 1,
+      "Ce": 4,
+      "I": 0.8,
+      "clases": 5,
+      "abstractas": 0,
+      "A": 0.0,
+      "D": 0.2,
+      "zona": "Cercano a la secuencia principal",
+      "depende_de": [
+        "src.db",
+        "src.interfaces_extra",
+        "src.logger",
+        "src.models_extra"
+      ],
+      "usado_por": [
+        "src.app_extras"
+      ]
+    },
+    "src.services": {
+      "modulo": "src.services",
+      "Ca": 1,
+      "Ce": 7,
+      "I": 0.88,
+      "clases": 3,
+      "abstractas": 0,
+      "A": 0.0,
+      "D": 0.12,
+      "zona": "Cercano a la secuencia principal",
+      "depende_de": [
+        "src.contexto_catalogo",
+        "src.contexto_reservas",
+        "src.events",
+        "src.interfaces",
+        "src.logger",
+        "src.models",
+        "src.validators"
+      ],
+      "usado_por": [
+        "src.app"
+      ]
+    },
+    "src.services_extra": {
+      "modulo": "src.services_extra",
+      "Ca": 1,
+      "Ce": 6,
+      "I": 0.86,
+      "clases": 5,
+      "abstractas": 0,
+      "A": 0.0,
+      "D": 0.14,
+      "zona": "Cercano a la secuencia principal",
+      "depende_de": [
+        "src.events",
+        "src.interfaces_extra",
+        "src.logger",
+        "src.models_extra",
+        "src.validators",
+        "src.validators_extra"
+      ],
+      "usado_por": [
+        "src.app_extras"
+      ]
+    },
+    "src.validators": {
+      "modulo": "src.validators",
+      "Ca": 6,
+      "Ce": 0,
+      "I": 0.0,
+      "clases": 2,
+      "abstractas": 0,
+      "A": 0.0,
+      "D": 1.0,
+      "zona": "Zona de dolor (estable y concreto)",
+      "depende_de": [],
+      "usado_por": [
+        "src.app",
+        "src.app_extras",
+        "src.contexto_reservas",
+        "src.services",
+        "src.services_extra",
+        "src.validators_extra"
+      ]
+    },
+    "src.validators_extra": {
+      "modulo": "src.validators_extra",
+      "Ca": 1,
+      "Ce": 1,
+      "I": 0.5,
+      "clases": 1,
+      "abstractas": 0,
+      "A": 0.0,
+      "D": 0.5,
+      "zona": "Zona de dolor (estable y concreto)",
+      "depende_de": [
+        "src.validators"
+      ],
+      "usado_por": [
+        "src.services_extra"
+      ]
+    },
+    "main": {
+      "modulo": "main",
+      "Ca": 0,
+      "Ce": 2,
+      "I": 1.0,
+      "clases": 0,
+      "abstractas": 0,
+      "A": 0.0,
+      "D": 0.0,
+      "zona": "Sin clases (funciones/constantes)",
+      "depende_de": [
+        "src.app",
+        "src.logger"
+      ],
+      "usado_por": []
+    }
+  },
+  "reglas": [
+    {
+      "regla": "Los servicios no importan repositorios concretos (solo interfaces)",
+      "principio": "DIP",
+      "cumple": true,
+      "violaciones": []
+    },
+    {
+      "regla": "Las interfaces no dependen de servicios, repositorios ni de la capa web",
+      "principio": "DIP",
+      "cumple": true,
+      "violaciones": []
+    },
+    {
+      "regla": "Los modelos de dominio no dependen de ningún otro módulo del proyecto",
+      "principio": "DIP / SRP",
+      "cumple": true,
+      "violaciones": []
+    },
+    {
+      "regla": "Solo los composition roots (app, app_extras) instancian repositorios concretos",
+      "principio": "DIP",
+      "cumple": true,
+      "violaciones": []
+    },
+    {
+      "regla": "Solo los repositorios (y db/db_viewer) importan sqlite3",
+      "principio": "SoD",
+      "cumple": true,
+      "violaciones": []
+    },
+    {
+      "regla": "Solo la capa web (app, app_extras) importa http.server",
+      "principio": "SoD",
+      "cumple": true,
+      "violaciones": []
+    },
+    {
+      "regla": "Los servicios y validadores no importan la capa web",
+      "principio": "SoD",
+      "cumple": true,
+      "violaciones": []
+    },
+    {
+      "regla": "Los Bounded Contexts Catálogo y Reservas no se importan entre sí (solo puerto y eventos)",
+      "principio": "Bounded Contexts",
+      "cumple": true,
+      "violaciones": []
+    },
+    {
+      "regla": "Los contextos y servicios no importan el bus concreto ni los consumidores (solo el puerto IEventPublisher)",
+      "principio": "DIP",
+      "cumple": true,
+      "violaciones": []
+    },
+    {
+      "regla": "Solo los composition roots importan el bus concreto y los consumidores",
+      "principio": "DIP",
+      "cumple": true,
+      "violaciones": []
+    },
+    {
+      "regla": "El contrato de eventos (events) no depende de ningún otro módulo del proyecto",
+      "principio": "DIP",
+      "cumple": true,
+      "violaciones": []
+    },
+    {
+      "regla": "Principio de Dependencias Estables: se depende de módulos más estables",
+      "principio": "SDP",
+      "cumple": true,
+      "violaciones": []
+    },
+    {
+      "regla": "Sin ciclos de dependencia entre módulos",
+      "principio": "ADP",
+      "cumple": true,
+      "violaciones": []
+    }
+  ]
+}

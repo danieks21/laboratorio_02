@@ -1,0 +1,18 @@
+@startuml nivel1_contexto
+!include <C4/C4_Context>
+LAYOUT_LEFT_RIGHT()
+skinparam dpi 200
+title Diagrama C4 - Nivel 1: Contexto del sistema GymExpress
+
+Person(socio, "Socio", "Consulta horarios y entrenadores, registra consumo de suplementos, pide prestados elementos del gimnasio y reserva servicios")
+Person(admin, "Personal administrativo", "Gestiona reservas, catálogo, inventario de insumos de limpieza, entrenadores y horarios")
+
+System(gym, "GymExpress", "Sistema web de gestión del gimnasio: reservas con Saga, suplementos, préstamos de elementos, insumos de limpieza y entrenadores")
+System_Ext(pasarela, "Pasarela de pagos", "SIMULADA en el código (PasarelaPagosMock). Procesa cobros y reembolsos")
+
+Rel(socio, gym, "Consulta y registra operaciones", "HTTP (navegador)")
+Rel(admin, gym, "Administra el gimnasio", "HTTP (navegador)")
+Rel(gym, pasarela, "Solicita cobro y reembolso", "Llamada de método (IPasarelaPagos)")
+
+SHOW_LEGEND()
+@enduml
